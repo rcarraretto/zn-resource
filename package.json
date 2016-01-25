@@ -1,7 +1,7 @@
 {
   "name": "zn-resource",
   "version": "0.1.0",
-  "description": "",
+  "description": "Helper for using zengine resources on backend plugins (unofficial)",
   "dependencies": {
     "bluebird": "^3.0.5",
     "lodash": "^4.0.0"
