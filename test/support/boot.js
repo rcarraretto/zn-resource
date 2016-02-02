@@ -3,8 +3,6 @@
 var Jasmine = require('jasmine');
 var jasmine = new Jasmine(); // jshint ignore:line
 
-require('jasmine-stealth');
-
 var SpecReporter = require("jasmine-spec-reporter");
 
 var specReporter = new SpecReporter({

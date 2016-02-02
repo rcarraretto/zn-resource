@@ -2,20 +2,24 @@
 
 describe('ZnRecordQuerySecondary', function() {
 
-	var Promise = require('bluebird');
+	var util = require('./zn-api-test-util.js');
 
 	var ZnFormBuilder = require('./zn-form-builder.js');
+	var ZnRecordDao = require('../src/zn-record-dao.js');
 	var ZnRecordQuerySecondary = require('../src/zn-record-query-secondary.js');
 	var ZnResourceQueryByAttributeValues = require('../src/zn-resource-query-by-attribute-values.js');
 
 	var znRecordQuerySecondary;
-	var znRecordQueryByAttributeValues;
+	var znNock;
 
 	beforeEach(function() {
-		znRecordQueryByAttributeValues = new ZnResourceQueryByAttributeValues();
+		var znApi = util.ZnApi();
+
+		var znRecordDao = new ZnRecordDao(znApi);
+		var znRecordQueryByAttributeValues = new ZnResourceQueryByAttributeValues(znRecordDao);
 		znRecordQuerySecondary = new ZnRecordQuerySecondary(znRecordQueryByAttributeValues);
 
-		spyOn(znRecordQueryByAttributeValues, 'queryData');
+		znNock = util.ZnNock();
 	});
 
 	describe('queryData', function() {
@@ -36,15 +40,6 @@ describe('ZnRecordQuerySecondary', function() {
 
 			var primaryRecordIds = [10, 11];
 
-			var secondaryRecordsForm2 = [
-				{
-					id: 20
-				},
-				{
-					id: 21
-				}
-			];
-
 			var secondaryRecordsForm3 = [
 				{
 					id: 30
@@ -54,19 +49,22 @@ describe('ZnRecordQuerySecondary', function() {
 				}
 			];
 
-			znRecordQueryByAttributeValues.queryData
-				.when({ formId: 2 }, 'field987', primaryRecordIds)
-				.thenReturn(Promise.resolve(secondaryRecordsForm2));
-
-			znRecordQueryByAttributeValues.queryData
-				.when({ formId: 3 }, 'field991', primaryRecordIds)
-				.thenReturn(Promise.resolve(secondaryRecordsForm3));
+			znNock.get('/forms/3/records?limit=500&field991=10%7C11').reply(200, {
+				data: secondaryRecordsForm3
+			});
 
 			var linkedForm = primaryForm.linkedForms[1];
 
 			znRecordQuerySecondary.queryData(linkedForm, primaryRecordIds)
 				.then(function(records) {
-					expect(records).toEqual(secondaryRecordsForm3);
+					expect(records.length).toEqual(2);
+					expect(records[0].id).toEqual(30);
+					expect(records[1].id).toEqual(31);
+				})
+				.catch(function(err) {
+					fail(err);
+				})
+				.finally(function() {
 					done();
 				});
 		});
