@@ -38,7 +38,7 @@ describe('ZnRecordDao', function() {
 
 			znRecordDao.get(request)
 				.then(function(response) {
-					expect(response).toEqual({
+					expect(response).to.equal({
 						id: 651,
 						formId: 7,
 						field1: 'apples'
@@ -78,12 +78,12 @@ describe('ZnRecordDao', function() {
 
 			znRecordDao.query(request)
 				.then(function(response) {
-					expect(response.totalCount).toEqual(2);
-					expect(response.data[0]).toEqual({
+					expect(response.totalCount).to.equal(2);
+					expect(response.data[0]).to.equal({
 						id: 1,
 						formId: 123
 					});
-					expect(response.data[1]).toEqual({
+					expect(response.data[1]).to.equal({
 						id: 3,
 						formId: 123
 					});
@@ -125,7 +125,7 @@ describe('ZnRecordDao', function() {
 
 				znRecordDao.save(record)
 					.then(function(response) {
-						expect(response).toEqual({
+						expect(response).to.equal({
 							id: 1,
 							formId: 123,
 							saved: true
@@ -169,7 +169,7 @@ describe('ZnRecordDao', function() {
 
 				znRecordDao.save(record)
 					.then(function(response) {
-						expect(response).toEqual({
+						expect(response).to.equal({
 							id: 7,
 							formId: 123,
 							saved: true

@@ -56,9 +56,9 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 				znResourceQueryByAttributeValues.queryData(request, attribute, values)
 					.then(function(resources) {
-						expect(resources.length).toEqual(2);
-						expect(resources[0].id).toEqual(apiResources[0].id);
-						expect(resources[1].id).toEqual(apiResources[1].id);
+						expect(resources.length).to.equal(2);
+						expect(resources[0].id).to.equal(apiResources[0].id);
+						expect(resources[1].id).to.equal(apiResources[1].id);
 					})
 					.catch(function(err) {
 						fail(err);
@@ -171,12 +171,12 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 				znResourceQueryByAttributeValues.queryData(request, attribute, values)
 					.then(function(resources) {
-						expect(resources.length).toEqual(5);
-						expect(resources[0].id).toEqual(expectedResources[0].id);
-						expect(resources[1].id).toEqual(expectedResources[1].id);
-						expect(resources[2].id).toEqual(expectedResources[2].id);
-						expect(resources[3].id).toEqual(expectedResources[3].id);
-						expect(resources[4].id).toEqual(expectedResources[4].id);
+						expect(resources.length).to.equal(5);
+						expect(resources[0].id).to.equal(expectedResources[0].id);
+						expect(resources[1].id).to.equal(expectedResources[1].id);
+						expect(resources[2].id).to.equal(expectedResources[2].id);
+						expect(resources[3].id).to.equal(expectedResources[3].id);
+						expect(resources[4].id).to.equal(expectedResources[4].id);
 					})
 					.catch(function(err) {
 						fail(err);
@@ -220,7 +220,7 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 				znResourceQueryByAttributeValues.queryData(request, attribute, values)
 					.then(function(resources) {
-						expect(resources).toEqual([]);
+						expect(resources.length).to.equal(0);
 					})
 					.catch(function(err) {
 						fail(err);
@@ -255,8 +255,8 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 				znResourceQueryByAttributeValues.findByFieldValue(request)
 					.then(function(resource) {
-						expect(resource.id).toEqual(apiResource.id);
-						expect(resource.field123).toEqual(apiResource.field123);
+						expect(resource.id).to.equal(apiResource.id);
+						expect(resource.field123).to.equal(apiResource.field123);
 					})
 					.catch(function(err) {
 						fail(err);

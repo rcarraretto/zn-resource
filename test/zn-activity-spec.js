@@ -41,7 +41,7 @@ describe('ZnActivity', function() {
 						folderId: 10
 					};
 
-					expect(activity.checkEvent(e)).toBe(true);
+					expect(activity.checkEvent(e)).to.equal(true);
 				});
 
 				it('should not match, when folder does not match', function() {
@@ -51,7 +51,7 @@ describe('ZnActivity', function() {
 						folderId: 1
 					};
 
-					expect(activity.checkEvent(e)).toBe(false);
+					expect(activity.checkEvent(e)).to.equal(false);
 				});
 			});
 
@@ -92,7 +92,7 @@ describe('ZnActivity', function() {
 						folderId: 10
 					};
 
-					expect(activity.checkEvent(e)).toBe(true);
+					expect(activity.checkEvent(e)).to.equal(true);
 				});
 
 				it('should not match, when target folder does not match', function() {
@@ -102,7 +102,7 @@ describe('ZnActivity', function() {
 						folderId: 9
 					};
 
-					expect(activity.checkEvent(e)).toBe(false);
+					expect(activity.checkEvent(e)).to.equal(false);
 				});
 			});
 
@@ -139,7 +139,7 @@ describe('ZnActivity', function() {
 						folderId: 5
 					};
 
-					expect(activity.checkEvent(e)).toBe(false);
+					expect(activity.checkEvent(e)).to.equal(false);
 				});
 
 				it('should not match, even if the record is inside that folder', function() {
@@ -149,7 +149,7 @@ describe('ZnActivity', function() {
 						folderId: 10
 					};
 
-					expect(activity.checkEvent(e)).toBe(false);
+					expect(activity.checkEvent(e)).to.equal(false);
 				});
 			});
 		});
@@ -162,7 +162,7 @@ describe('ZnActivity', function() {
 					activity.checkEvent({
 						type: 'something-invalid'
 					});
-				}).toThrow(new Error('Activity: checkEvent: Invalid type something-invalid'));
+				}).to.throw('Activity: checkEvent: Invalid type something-invalid');
 			});
 		});
 
@@ -172,7 +172,7 @@ describe('ZnActivity', function() {
 
 				expect(function() {
 					activity.checkEvent({});
-				}).toThrow(new Error('Activity: checkEvent: Invalid type undefined'));
+				}).to.throw('Activity: checkEvent: Invalid type undefined');
 			});
 		});
 	});

@@ -30,8 +30,8 @@ describe('ZnActivityDao', function() {
 
 			znActivityDao.get(651)
 				.then(function(response) {
-					expect(response.id).toEqual(651);
-					expect(response instanceof ZnActivity).toBe(true);
+					expect(response.id).to.equal(651);
+					expect(response instanceof ZnActivity).to.equal(true);
 				})
 				.catch(function(err) {
 					fail(err);

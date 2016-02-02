@@ -65,7 +65,7 @@ describe('ZnResourceQueryFullscale', function() {
 
 				znResourceQueryFullscale.queryData(request)
 					.then(function(resources) {
-						expect(resources).toEqual(expectedResources);
+						expect(resources).to.equal(expectedResources);
 					})
 					.catch(function(err) {
 						fail(err);
@@ -167,7 +167,7 @@ describe('ZnResourceQueryFullscale', function() {
 
 				znResourceQueryFullscale.queryData(request)
 					.then(function(resources) {
-						expect(resources).toEqual(expectedResources);
+						expect(resources).to.equal(expectedResources);
 					})
 					.catch(function(err) {
 						fail(err);
@@ -201,9 +201,9 @@ describe('ZnResourceQueryFullscale', function() {
 
 				znResourceQueryFullscale.queryData(request)
 					.then(function(response) {
-						expect(response.length).toEqual(2);
-						expect(response[0].id).toEqual(apiResponse.data[0].id);
-						expect(response[1].id).toEqual(apiResponse.data[1].id);
+						expect(response.length).to.equal(2);
+						expect(response[0].id).to.equal(apiResponse.data[0].id);
+						expect(response[1].id).to.equal(apiResponse.data[1].id);
 					})
 					.catch(function(err) {
 						fail(err);
@@ -230,9 +230,9 @@ describe('ZnResourceQueryFullscale', function() {
 
 			znResourceQueryFullscale.queryData(request)
 				.then(function(response) {
-					expect(response.length).toEqual(2);
-					expect(response[0].id).toEqual(apiResponse.data[0].id);
-					expect(response[1].id).toEqual(apiResponse.data[1].id);
+					expect(response.length).to.equal(2);
+					expect(response[0].id).to.equal(apiResponse.data[0].id);
+					expect(response[1].id).to.equal(apiResponse.data[1].id);
 				})
 				.catch(function(err) {
 					fail(err);

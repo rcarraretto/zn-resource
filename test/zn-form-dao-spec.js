@@ -31,9 +31,9 @@ describe('ZnFormDao', function() {
 
 			znFormDao.get(123).then(function(form) {
 
-				expect(form.id).toEqual(expectedForm.id);
+				expect(form.id).to.equal(expectedForm.id);
 
-				expect(form instanceof ZnForm).toEqual(true);
+				expect(form instanceof ZnForm).to.equal(true);
 			})
 			.catch(function(err) {
 				fail(err);

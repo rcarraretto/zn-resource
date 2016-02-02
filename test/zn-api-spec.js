@@ -47,7 +47,7 @@ describe('ZnApi', function() {
 				});
 
 			znApi.get('/forms/123/records').then(function(records) {
-				expect(records).toEqual(expectedRecords);
+				expect(records).to.equal(expectedRecords);
 			})
 			.catch(function(err) {
 				fail(new Error(err));
@@ -66,7 +66,7 @@ describe('ZnApi', function() {
 				.get('/')
 				.reply(200, function(uri, requestBody) {
 					uri = decodeURIComponent(uri);
-					expect(uri).toEqual('/v1/forms/1/records?field100=1|2|3&field200=apples');
+					expect(uri).to.equal('/v1/forms/1/records?field100=1|2|3&field200=apples');
 					return {};
 				});
 
@@ -107,7 +107,7 @@ describe('ZnApi', function() {
 				.reply(200, expectedResponse);
 
 			znApi.query('/forms/123/records').then(function(response) {
-				expect(response).toEqual(expectedResponse);
+				expect(response).to.equal(expectedResponse);
 			})
 			.catch(function(err) {
 				fail(new Error(err));
@@ -126,7 +126,7 @@ describe('ZnApi', function() {
 				.get('/')
 				.reply(200, function(uri, requestBody) {
 					uri = decodeURIComponent(uri);
-					expect(uri).toEqual('/v1/forms/1/records?field100=1|2|3&field200=apples');
+					expect(uri).to.equal('/v1/forms/1/records?field100=1|2|3&field200=apples');
 					return {};
 				});
 
@@ -153,7 +153,7 @@ describe('ZnApi', function() {
 				.get('/')
 				.reply(200, function(uri, requestBody) {
 					uri = decodeURIComponent(uri);
-					expect(uri).toEqual('/v1/forms/1/records?workspace.id=123');
+					expect(uri).to.equal('/v1/forms/1/records?workspace.id=123');
 					return {};
 				});
 
@@ -200,7 +200,7 @@ describe('ZnApi', function() {
 				};
 
 				znApi.query('/forms/1/records').then(function(response) {
-					expect(response).toEqual(expectedResponse);
+					expect(response).to.equal(expectedResponse);
 				})
 				.catch(function(err) {
 					fail(new Error(err));
@@ -229,7 +229,7 @@ describe('ZnApi', function() {
 					.reply(200, expectedResponse);
 
 				znApi.query('/forms/1/records').then(function(response) {
-					expect(response).toEqual(expectedResponse);
+					expect(response).to.equal(expectedResponse);
 				})
 				.catch(function(err) {
 					fail(new Error(err));
@@ -257,7 +257,7 @@ describe('ZnApi', function() {
 				});
 
 			znApi.post('/forms/123/records', record).then(function(data) {
-				expect(data).toEqual(record);
+				expect(data).to.equal(record);
 			})
 			.catch(function(err) {
 				fail(new Error(err));
@@ -284,7 +284,7 @@ describe('ZnApi', function() {
 				});
 
 			znApi.put('/forms/123/records/456', record).then(function(data) {
-				expect(data).toEqual(record);
+				expect(data).to.equal(record);
 			})
 			.catch(function(err) {
 				fail(new Error(err));

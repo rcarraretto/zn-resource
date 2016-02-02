@@ -98,7 +98,7 @@ describe('znRecordFamilyAssembler', function() {
 
 			var assembled = znRecordFamilyAssembler.assemble(primaryForm, recordsByForm);
 
-			expect(assembled).toEqual(expectedAssembled);
+			expect(assembled).to.eql(expectedAssembled);
 		});
 	});
 
@@ -177,7 +177,7 @@ describe('znRecordFamilyAssembler', function() {
 
 			var recordFamilyProjected = znRecordFamilyAssembler.mapRecords(recordFamily, iteratee);
 
-			expect(recordFamilyProjected).toEqual(expectedRecordFamilyProjected);
+			expect(recordFamilyProjected).to.eql(expectedRecordFamilyProjected);
 		});
 	});
 

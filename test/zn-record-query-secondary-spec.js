@@ -57,9 +57,9 @@ describe('ZnRecordQuerySecondary', function() {
 
 			znRecordQuerySecondary.queryData(linkedForm, primaryRecordIds)
 				.then(function(records) {
-					expect(records.length).toEqual(2);
-					expect(records[0].id).toEqual(30);
-					expect(records[1].id).toEqual(31);
+					expect(records.length).to.equal(2);
+					expect(records[0].id).to.equal(30);
+					expect(records[1].id).to.equal(31);
 				})
 				.catch(function(err) {
 					fail(err);

@@ -52,7 +52,7 @@ describe('ZnRecordService', function() {
 				};
 
 				var assert = function(resource) {
-					expect(resource.id).toEqual(resources[0].id);
+					expect(resource.id).to.equal(resources[0].id);
 				};
 
 				znRecordService.findByFieldValue(request)
