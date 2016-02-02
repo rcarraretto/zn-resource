@@ -19,7 +19,7 @@ describe('ZnFormDao', function() {
 
 	describe('get', function () {
 
-		it('should call api and return instance of ZnForm', function(done) {
+		it('should call api and return instance of ZnForm', function() {
 
 			var expectedForm = {
 				id: 123
@@ -29,17 +29,11 @@ describe('ZnFormDao', function() {
 				data: expectedForm
 			});
 
-			znFormDao.get(123).then(function(form) {
+			return znFormDao.get(123).then(function(form) {
 
 				expect(form.id).to.equal(expectedForm.id);
 
 				expect(form instanceof ZnForm).to.equal(true);
-			})
-			.catch(function(err) {
-				fail(err);
-			})
-			.finally(function() {
-				done();
 			});
 		});
 	});

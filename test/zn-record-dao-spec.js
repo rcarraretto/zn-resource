@@ -19,7 +19,7 @@ describe('ZnRecordDao', function() {
 
 	describe('get', function () {
 
-		it('should call GET api and return formatted record', function(done) {
+		it('should call GET api and return formatted record', function() {
 
 			var apiResponse = {
 				data: {
@@ -36,26 +36,20 @@ describe('ZnRecordDao', function() {
 				formId: 7
 			};
 
-			znRecordDao.get(request)
+			return znRecordDao.get(request)
 				.then(function(response) {
-					expect(response).to.equal({
+					expect(response).to.eql({
 						id: 651,
 						formId: 7,
 						field1: 'apples'
 					});
-				})
-				.catch(function(err) {
-					fail(err);
-				})
-				.finally(function() {
-					done();
 				});
 		});
 	});
 
 	describe('query', function () {
 
-		it('should call GET api and return formatted records', function(done) {
+		it('should call GET api and return formatted records', function() {
 
 			var apiResponse = {
 				data: [
@@ -76,23 +70,17 @@ describe('ZnRecordDao', function() {
 				field123: 'apples'
 			};
 
-			znRecordDao.query(request)
+			return znRecordDao.query(request)
 				.then(function(response) {
 					expect(response.totalCount).to.equal(2);
-					expect(response.data[0]).to.equal({
+					expect(response.data[0]).to.eql({
 						id: 1,
 						formId: 123
 					});
-					expect(response.data[1]).to.equal({
+					expect(response.data[1]).to.eql({
 						id: 3,
 						formId: 123
 					});
-				})
-				.catch(function(err) {
-					fail(err);
-				})
-				.finally(function() {
-					done();
 				});
 		});
 	});
@@ -101,7 +89,7 @@ describe('ZnRecordDao', function() {
 
 		describe('without id', function() {
 
-			it('should create record and return formatted saved record', function(done) {
+			it('should create record and return formatted saved record', function() {
 
 				var record = {
 					formId: 123,
@@ -123,27 +111,20 @@ describe('ZnRecordDao', function() {
 
 				znNock.post('/forms/123/records', recordRequest).reply(200, apiResponse);
 
-				znRecordDao.save(record)
+				return znRecordDao.save(record)
 					.then(function(response) {
-						expect(response).to.equal({
+						expect(response).to.eql({
 							id: 1,
 							formId: 123,
 							saved: true
 						});
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-
-						done();
 					});
 			});
 		});
 
 		describe('with id', function() {
 
-			it('should update record and return formatted saved record', function(done) {
+			it('should update record and return formatted saved record', function() {
 
 				var record = {
 					id: 7,
@@ -167,20 +148,13 @@ describe('ZnRecordDao', function() {
 
 				znNock.put('/forms/123/records/7', recordRequest).reply(200, apiResponse);
 
-				znRecordDao.save(record)
+				return znRecordDao.save(record)
 					.then(function(response) {
-						expect(response).to.equal({
+						expect(response).to.eql({
 							id: 7,
 							formId: 123,
 							saved: true
 						});
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-
-						done();
 					});
 			});
 		});

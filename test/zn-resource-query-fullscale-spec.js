@@ -23,7 +23,7 @@ describe('ZnResourceQueryFullscale', function() {
 
 		describe('when only one query is required', function() {
 
-			it('should return all resources', function(done) {
+			it('should return all resources', function() {
 
 				var request = {
 					formId: 1
@@ -63,22 +63,16 @@ describe('ZnResourceQueryFullscale', function() {
 
 				znResourceQueryFullscale.limitPerQuery = 2;
 
-				znResourceQueryFullscale.queryData(request)
+				return znResourceQueryFullscale.queryData(request)
 					.then(function(resources) {
-						expect(resources).to.equal(expectedResources);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resources).to.eql(expectedResources);
 					});
 			});
 		});
 
 		describe('when multiple queries are required', function() {
 
-			it('should return all resources', function(done) {
+			it('should return all resources', function() {
 
 				var request = {
 					formId: 1
@@ -165,22 +159,16 @@ describe('ZnResourceQueryFullscale', function() {
 
 				znResourceQueryFullscale.limitPerQuery = 2;
 
-				znResourceQueryFullscale.queryData(request)
+				return znResourceQueryFullscale.queryData(request)
 					.then(function(resources) {
-						expect(resources).to.equal(expectedResources);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resources).to.eql(expectedResources);
 					});
 			});
 		});
 
 		describe('when request has params', function() {
 
-			it('should preserve them, except page and limit', function(done) {
+			it('should preserve them, except page and limit', function() {
 
 				var request = {
 					formId: 1,
@@ -199,22 +187,16 @@ describe('ZnResourceQueryFullscale', function() {
 
 				znResourceQueryFullscale.limitPerQuery = 2;
 
-				znResourceQueryFullscale.queryData(request)
+				return znResourceQueryFullscale.queryData(request)
 					.then(function(response) {
 						expect(response.length).to.equal(2);
 						expect(response[0].id).to.equal(apiResponse.data[0].id);
 						expect(response[1].id).to.equal(apiResponse.data[1].id);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
 					});
 			});
 		});
 
-		it('should use 500 as default limit per query', function(done) {
+		it('should use 500 as default limit per query', function() {
 
 			var request = {
 				formId: 1
@@ -228,17 +210,11 @@ describe('ZnResourceQueryFullscale', function() {
 
 			znNock.get('/forms/1/records?limit=500&page=1').reply(200, apiResponse);
 
-			znResourceQueryFullscale.queryData(request)
+			return znResourceQueryFullscale.queryData(request)
 				.then(function(response) {
 					expect(response.length).to.equal(2);
 					expect(response[0].id).to.equal(apiResponse.data[0].id);
 					expect(response[1].id).to.equal(apiResponse.data[1].id);
-				})
-				.catch(function(err) {
-					fail(err);
-				})
-				.finally(function() {
-					done();
 				});
 		});
 

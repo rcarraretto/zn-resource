@@ -24,7 +24,7 @@ describe('ZnRecordQuerySecondary', function() {
 
 	describe('queryData', function() {
 
-		it('should query secondary records (i.e. records of linked form related to primary records)', function(done) {
+		it('should query secondary records (i.e. records of linked form related to primary records)', function() {
 
 			var primaryForm = new ZnFormBuilder()
 				.id(1)
@@ -55,17 +55,11 @@ describe('ZnRecordQuerySecondary', function() {
 
 			var linkedForm = primaryForm.linkedForms[1];
 
-			znRecordQuerySecondary.queryData(linkedForm, primaryRecordIds)
+			return znRecordQuerySecondary.queryData(linkedForm, primaryRecordIds)
 				.then(function(records) {
 					expect(records.length).to.equal(2);
 					expect(records[0].id).to.equal(30);
 					expect(records[1].id).to.equal(31);
-				})
-				.catch(function(err) {
-					fail(err);
-				})
-				.finally(function() {
-					done();
 				});
 		});
 	});

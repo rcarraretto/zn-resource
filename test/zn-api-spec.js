@@ -29,7 +29,7 @@ describe('ZnApi', function() {
 
 	describe('get', function () {
 
-		it('should send GET request and return response data', function(done) {
+		it('should send GET request and return response data', function() {
 
 			var expectedRecords = [
 				{
@@ -46,18 +46,12 @@ describe('ZnApi', function() {
 					data: expectedRecords
 				});
 
-			znApi.get('/forms/123/records').then(function(records) {
-				expect(records).to.equal(expectedRecords);
-			})
-			.catch(function(err) {
-				fail(new Error(err));
-			})
-			.finally(function() {
-				done();
+			return znApi.get('/forms/123/records').then(function(records) {
+				expect(records).to.eql(expectedRecords);
 			});
 		});
 
-		it('should assemble params, so array values are separated by |', function(done) {
+		it('should assemble params, so array values are separated by |', function() {
 
 			nock('https://api.zenginehq.com')
 				.filteringPath(function(path){
@@ -75,19 +69,13 @@ describe('ZnApi', function() {
 				field200: 'apples'
 			};
 
-			znApi.get('/forms/1/records', params)
-				.catch(function(err) {
-					fail(new Error(err));
-				})
-				.finally(function() {
-					done();
-				});
+			return znApi.get('/forms/1/records', params);
 		});
 	});
 
 	describe('query', function () {
 
-		it('should send GET request and return response', function(done) {
+		it('should send GET request and return response', function() {
 
 			var expectedResponse = {
 				data: [
@@ -106,18 +94,12 @@ describe('ZnApi', function() {
 				.get('/forms/123/records')
 				.reply(200, expectedResponse);
 
-			znApi.query('/forms/123/records').then(function(response) {
-				expect(response).to.equal(expectedResponse);
-			})
-			.catch(function(err) {
-				fail(new Error(err));
-			})
-			.finally(function() {
-				done();
+			return znApi.query('/forms/123/records').then(function(response) {
+				expect(response).to.eql(expectedResponse);
 			});
 		});
 
-		it('should assemble params, so array values are separated by |', function(done) {
+		it('should assemble params, so array values are separated by |', function() {
 
 			nock('https://api.zenginehq.com')
 				.filteringPath(function(path){
@@ -135,16 +117,10 @@ describe('ZnApi', function() {
 				field200: 'apples'
 			};
 
-			znApi.query('/forms/1/records', params)
-				.catch(function (err) {
-					fail(new Error(err));
-				})
-				.finally(function() {
-					done();
-				});
+			return znApi.query('/forms/1/records', params);
 		});
 
-		it('should assemble params, so object values are flattened', function(done) {
+		it('should assemble params, so object values are flattened', function() {
 
 			nock('https://api.zenginehq.com')
 				.filteringPath(function(path){
@@ -163,18 +139,12 @@ describe('ZnApi', function() {
 				}
 			};
 
-			znApi.query('/forms/1/records', params)
-				.catch(function (err) {
-					fail(new Error(err));
-				})
-				.finally(function() {
-					done();
-				});
+			return znApi.query('/forms/1/records', params);
 		});
 
 		describe('when no results were found (i.e. totalCount is 0)', function() {
 
-			it("should set data as empty array and offset as 0, because zengine api doesn't", function(done) {
+			it("should set data as empty array and offset as 0, because zengine api doesn't", function() {
 
 				nock('https://api.zenginehq.com')
 					.filteringPath(function(path){
@@ -199,21 +169,15 @@ describe('ZnApi', function() {
 					data: []
 				};
 
-				znApi.query('/forms/1/records').then(function(response) {
-					expect(response).to.equal(expectedResponse);
-				})
-				.catch(function(err) {
-					fail(new Error(err));
-				})
-				.finally(function() {
-					done();
+				return znApi.query('/forms/1/records').then(function(response) {
+					expect(response).to.eql(expectedResponse);
 				});
 			});
 		});
 
 		describe('when totalCount is not set', function() {
 
-			it('should not attempt to parse response (just for precaution)', function(done) {
+			it('should not attempt to parse response (just for precaution)', function() {
 
 				var expectedResponse = {
 					status: 404,
@@ -228,14 +192,8 @@ describe('ZnApi', function() {
 					.get('/')
 					.reply(200, expectedResponse);
 
-				znApi.query('/forms/1/records').then(function(response) {
-					expect(response).to.equal(expectedResponse);
-				})
-				.catch(function(err) {
-					fail(new Error(err));
-				})
-				.finally(function() {
-					done();
+				return znApi.query('/forms/1/records').then(function(response) {
+					expect(response).to.eql(expectedResponse);
 				});
 			});
 		});
@@ -243,7 +201,7 @@ describe('ZnApi', function() {
 
 	describe('post', function () {
 
-		it('should POST to api and return response data', function(done) {
+		it('should POST to api and return response data', function() {
 
 			var record = {
 				id: 1,
@@ -256,21 +214,15 @@ describe('ZnApi', function() {
 					data: record
 				});
 
-			znApi.post('/forms/123/records', record).then(function(data) {
-				expect(data).to.equal(record);
-			})
-			.catch(function(err) {
-				fail(new Error(err));
-			})
-			.finally(function() {
-				done();
+			return znApi.post('/forms/123/records', record).then(function(data) {
+				expect(data).to.eql(record);
 			});
 		});
 	});
 
 	describe('put', function () {
 
-		it('should PUT to api and return response data', function(done) {
+		it('should PUT to api and return response data', function() {
 
 			var record = {
 				id: 1,
@@ -283,14 +235,8 @@ describe('ZnApi', function() {
 					data: record
 				});
 
-			znApi.put('/forms/123/records/456', record).then(function(data) {
-				expect(data).to.equal(record);
-			})
-			.catch(function(err) {
-				fail(new Error(err));
-			})
-			.finally(function() {
-				done();
+			return znApi.put('/forms/123/records/456', record).then(function(data) {
+				expect(data).to.eql(record);
 			});
 		});
 	});
