@@ -17,7 +17,7 @@ describe('ZnActivityDao', function() {
 
 	describe('get', function () {
 
-		it('should request GET api and return instance of ZnActivity', function(done) {
+		it('should request GET api and return instance of ZnActivity', function() {
 
 			var apiResponse = {
 				data: {
@@ -28,16 +28,10 @@ describe('ZnActivityDao', function() {
 
 			znNock.get('/activities/651').reply(200, apiResponse);
 
-			znActivityDao.get(651)
+			return znActivityDao.get(651)
 				.then(function(response) {
-					expect(response.id).toEqual(651);
-					expect(response instanceof ZnActivity).toBe(true);
-				})
-				.catch(function(err) {
-					fail(err);
-				})
-				.finally(function() {
-					done();
+					expect(response.id).to.equal(651);
+					expect(response instanceof ZnActivity).to.equal(true);
 				});
 		});
 	});

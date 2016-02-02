@@ -1,19 +1,18 @@
 {
   "name": "zn-resource",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Helper for using zengine resources on backend plugins (unofficial)",
   "dependencies": {
     "bluebird": "^3.0.5",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "jasmine": "^2.3.2",
-    "jasmine-spec-reporter": "^2.4.0",
-    "jasmine-stealth": "git://github.com/longmatthewh/jasmine-stealth",
+    "chai": "^3.5.0",
     "jshint": "^2.8.0",
+    "mocha": "^2.4.5",
     "nock": "^3.1.0",
-    "watch": "^0.16.0",
-    "requestify": "^0.1.17"
+    "requestify": "^0.1.17",
+    "watch": "^0.16.0"
   },
   "main": "index.js",
   "directories": {
@@ -22,7 +21,7 @@
   "scripts": {
     "codesmell": "jshint test src index.js",
     "lint": "npm run codesmell -s",
-    "test": "node ./test/support/boot.js",
+    "test": "mocha --reporter min --require test/support/mocha.js",
     "test:watch": "watch 'npm run test -s'",
     "watch": "watch 'npm run test -s || npm run lint -s'"
   },

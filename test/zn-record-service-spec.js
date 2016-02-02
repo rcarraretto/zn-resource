@@ -43,7 +43,7 @@ describe('ZnRecordService', function() {
 
 		describe('findByFieldValue', function() {
 
-			it('should', function(done) {
+			it('should', function() {
 
 				var request = {
 					formId: 7,
@@ -52,17 +52,11 @@ describe('ZnRecordService', function() {
 				};
 
 				var assert = function(resource) {
-					expect(resource.id).toEqual(resources[0].id);
+					expect(resource.id).to.equal(resources[0].id);
 				};
 
-				znRecordService.findByFieldValue(request)
-					.then(assert)
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
-					});
+				return znRecordService.findByFieldValue(request)
+					.then(assert);
 			});
 		});
 	});

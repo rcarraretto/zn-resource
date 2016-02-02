@@ -23,7 +23,7 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 		describe('when only one query is required', function() {
 
-			it('should return all resources', function(done) {
+			it('should return all resources', function() {
 
 				var apiResources = [
 					{
@@ -54,24 +54,18 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 				znResourceQueryByAttributeValues.limitPerQuery = 2;
 
-				znResourceQueryByAttributeValues.queryData(request, attribute, values)
+				return znResourceQueryByAttributeValues.queryData(request, attribute, values)
 					.then(function(resources) {
-						expect(resources.length).toEqual(2);
-						expect(resources[0].id).toEqual(apiResources[0].id);
-						expect(resources[1].id).toEqual(apiResources[1].id);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resources.length).to.equal(2);
+						expect(resources[0].id).to.equal(apiResources[0].id);
+						expect(resources[1].id).to.equal(apiResources[1].id);
 					});
 			});
 		});
 
 		describe('when multiple queries are required', function() {
 
-			it('should return all resources', function(done) {
+			it('should return all resources', function() {
 
 				var apiRecords1 = [
 					{
@@ -169,25 +163,19 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 				znResourceQueryByAttributeValues.limitPerQuery = 2;
 
-				znResourceQueryByAttributeValues.queryData(request, attribute, values)
+				return znResourceQueryByAttributeValues.queryData(request, attribute, values)
 					.then(function(resources) {
-						expect(resources.length).toEqual(5);
-						expect(resources[0].id).toEqual(expectedResources[0].id);
-						expect(resources[1].id).toEqual(expectedResources[1].id);
-						expect(resources[2].id).toEqual(expectedResources[2].id);
-						expect(resources[3].id).toEqual(expectedResources[3].id);
-						expect(resources[4].id).toEqual(expectedResources[4].id);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resources.length).to.equal(5);
+						expect(resources[0].id).to.equal(expectedResources[0].id);
+						expect(resources[1].id).to.equal(expectedResources[1].id);
+						expect(resources[2].id).to.equal(expectedResources[2].id);
+						expect(resources[3].id).to.equal(expectedResources[3].id);
+						expect(resources[4].id).to.equal(expectedResources[4].id);
 					});
 			});
 		});
 
-		it('should query in groups of 500 values by default, since the url has a size limit', function(done) {
+		it('should query in groups of 500 values by default, since the url has a size limit', function() {
 
 			var expectedResponse = {
 				data: []
@@ -201,32 +189,20 @@ describe('ZnResourceQueryByAttributeValues', function() {
 			var attribute = 'field123';
 			var values = [1, 3];
 
-			znResourceQueryByAttributeValues.queryData(request, attribute, values)
-				.catch(function(err) {
-					fail(err);
-				})
-				.finally(function() {
-					done();
-				});
+			return znResourceQueryByAttributeValues.queryData(request, attribute, values);
 		});
 
 		describe('when values is empty array', function() {
 
-			it('should return resolved promise with empty resources', function(done) {
+			it('should return resolved promise with empty resources', function() {
 
 				var request = {};
 				var attribute = 'field123';
 				var values = [];
 
-				znResourceQueryByAttributeValues.queryData(request, attribute, values)
+				return znResourceQueryByAttributeValues.queryData(request, attribute, values)
 					.then(function(resources) {
-						expect(resources).toEqual([]);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resources.length).to.equal(0);
 					});
 			});
 		});
@@ -234,7 +210,7 @@ describe('ZnResourceQueryByAttributeValues', function() {
 
 	describe('findByFieldValue', function() {
 
-		it('should return first resource', function(done) {
+		it('should return first resource', function() {
 
 				var apiResource = {
 					id: 1,
@@ -253,20 +229,14 @@ describe('ZnResourceQueryByAttributeValues', function() {
 					value: 'apples'
 				};
 
-				znResourceQueryByAttributeValues.findByFieldValue(request)
+				return znResourceQueryByAttributeValues.findByFieldValue(request)
 					.then(function(resource) {
-						expect(resource.id).toEqual(apiResource.id);
-						expect(resource.field123).toEqual(apiResource.field123);
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resource.id).to.equal(apiResource.id);
+						expect(resource.field123).to.equal(apiResource.field123);
 					});
 		});
 
-		it('should return null when resource is not found', function(done) {
+		it('should return null when resource is not found', function() {
 
 				var queryResponse = {
 					status: 404,
@@ -281,15 +251,9 @@ describe('ZnResourceQueryByAttributeValues', function() {
 					value: 'apples'
 				};
 
-				znResourceQueryByAttributeValues.findByFieldValue(request)
+				return znResourceQueryByAttributeValues.findByFieldValue(request)
 					.then(function(resource) {
-						expect(resource).toBeNull();
-					})
-					.catch(function(err) {
-						fail(err);
-					})
-					.finally(function() {
-						done();
+						expect(resource).to.be.null;
 					});
 		});
 	});

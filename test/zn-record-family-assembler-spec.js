@@ -98,7 +98,7 @@ describe('znRecordFamilyAssembler', function() {
 
 			var assembled = znRecordFamilyAssembler.assemble(primaryForm, recordsByForm);
 
-			expect(assembled).toEqual(expectedAssembled);
+			expect(assembled).to.eql(expectedAssembled);
 		});
 	});
 
@@ -160,16 +160,24 @@ describe('znRecordFamilyAssembler', function() {
 				}
 			};
 
-			var iteratee = jasmine.createSpy('iteratee');
-			iteratee
-				.when(record100_1, 1).thenReturn(record100_1_projection)
-				.when(record100_3, 3).thenReturn(record100_3_projection)
-				.when(record101_1, 1).thenReturn(record101_1_projection)
-				.when(record101_7, 7).thenReturn(record101_7_projection);
+			var iteratee = function(record, formId) {
+				if (record === record100_1 && formId === 1) {
+					return record100_1_projection;
+				}
+				if (record === record100_3 && formId === 3) {
+					return record100_3_projection;
+				}
+				if (record === record101_1 && formId === 1) {
+					return record101_1_projection;
+				}
+				if (record === record101_7 && formId === 7) {
+					return record101_7_projection;
+				}
+			};
 
 			var recordFamilyProjected = znRecordFamilyAssembler.mapRecords(recordFamily, iteratee);
 
-			expect(recordFamilyProjected).toEqual(expectedRecordFamilyProjected);
+			expect(recordFamilyProjected).to.eql(expectedRecordFamilyProjected);
 		});
 	});
 
