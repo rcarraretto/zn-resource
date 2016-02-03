@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.2.0",
     "jshint": "^2.8.0",
     "mocha": "^2.4.5",
     "nock": "^3.1.0",

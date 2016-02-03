@@ -3,6 +3,7 @@
 var ZnApi = require('./zn-api.js');
 var ZnActivityDao = require('./zn-activity-dao.js');
 var ZnFormDao = require('./zn-form-dao.js');
+var ZnNoteDao = require('./zn-note-dao.js');
 var ZnRecordDao = require('./zn-record-dao.js');
 var ZnRecordService = require('./zn-record-service.js');
 
@@ -21,7 +22,8 @@ ZnFactory.prototype.ZnFormDao = function() {
 
 ZnFactory.prototype.ZnRecordService = function() {
 	var znRecordDao = new ZnRecordDao(this.znApi);
-	return new ZnRecordService(znRecordDao);
+	var znNoteDao = new ZnNoteDao(this.znApi);
+	return new ZnRecordService(znRecordDao, znNoteDao);
 };
 
 module.exports = ZnFactory;
