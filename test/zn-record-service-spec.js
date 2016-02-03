@@ -5,17 +5,13 @@ describe('ZnRecordService', function() {
 	var nock = require('nock');
 	var util = require('./zn-api-test-util.js');
 
-	var ZnRecordDao = require('../src/zn-record-dao.js');
-	var ZnRecordService = require('../src/zn-record-service.js');
-
-	var znRecordDao;
 	var znRecordService;
+	var znNock;
 
 	beforeEach(function() {
-
-		var znApi = util.ZnApi();
-		znRecordDao = new ZnRecordDao(znApi);
-		znRecordService = new ZnRecordService(znRecordDao);
+		var znFactory = util.ZnFactory();
+		znRecordService = znFactory.ZnRecordService();
+		znNock = util.ZnNock();
 	});
 
 	describe('GET requests', function() {
@@ -59,5 +55,24 @@ describe('ZnRecordService', function() {
 					.then(assert);
 			});
 		});
+	});
+
+	describe('addNote', function() {
+
+		it('should POST', function() {
+
+			var apiNote = {
+				id: 88
+			};
+
+			znNock.post('/notes').reply(200, { data: apiNote });
+
+			return znRecordService.addNote({
+				workspaceId: 10,
+				recordId: 580,
+				body: 'Hello'
+			}).should.eventually.eql(apiNote);
+		});
+
 	});
 });
