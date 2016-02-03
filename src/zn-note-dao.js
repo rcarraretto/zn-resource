@@ -1,7 +1,5 @@
 'use strict';
 
-var Promise = require('bluebird');
-
 var ZnNoteDao = function(znApi) {
 	this.znApi = znApi;
 };
