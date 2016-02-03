@@ -19,4 +19,11 @@ ZnNoteDao.prototype.save = function(request) {
 	return this.znApi.post('/notes', apiRequest);
 };
 
+ZnNoteDao.prototype.get = function(request) {
+
+	var endpoint = '/notes/' + request.id;
+
+	return this.znApi.get(endpoint);
+};
+
 module.exports = ZnNoteDao;
