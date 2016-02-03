@@ -75,4 +75,29 @@ describe('ZnRecordService', function() {
 		});
 
 	});
+
+	describe('getNote', function() {
+
+		it('should Get', function() {
+
+			var apiNote = {
+				id: 88,
+				workspace: {
+					id: 10
+				},
+				record: {
+					id: 580
+				}
+			};
+
+			znNock.get('/notes/88').reply(200, { data: apiNote });
+
+			return znRecordService.getNote({
+				workspaceId: 10,
+				recordId: 580,
+				id: 88
+			}).should.eventually.eql(apiNote);
+		});
+
+	});
 });

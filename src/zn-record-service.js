@@ -30,4 +30,9 @@ ZnRecordService.prototype.addNote = function(request) {
 	return service.add(request);
 };
 
+ZnRecordService.prototype.getNote = function(request) {
+	var service = new ZnRecordNoteDao(this.znNoteDao);
+	return service.get(request);
+};
+
 module.exports = ZnRecordService;

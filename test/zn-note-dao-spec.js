@@ -50,4 +50,30 @@ describe('ZnNoteDao', function() {
 				});
 		});
 	});
+
+	describe('get', function() {
+
+		it('should send GET request to api and return response data', function() {
+
+			var request = {
+				id: 651
+			};
+
+			var apiResponse = {
+				data: {
+					id: 651
+				},
+				totalCount: 1
+			};
+
+			znNock.get('/notes/651')
+				.reply(200, apiResponse);
+
+			return znNoteDao.get(request)
+				.then(function(response) {
+					expect(response.id).to.equal(651);
+				});
+		});
+
+	});
 });
