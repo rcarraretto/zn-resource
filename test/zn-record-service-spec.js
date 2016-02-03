@@ -5,19 +5,12 @@ describe('ZnRecordService', function() {
 	var nock = require('nock');
 	var util = require('./zn-api-test-util.js');
 
-	var ZnNoteDao = require('../src/zn-note-dao.js');
-	var ZnRecordDao = require('../src/zn-record-dao.js');
-	var ZnRecordService = require('../src/zn-record-service.js');
-
 	var znRecordService;
 	var znNock;
 
 	beforeEach(function() {
-
-		var znApi = util.ZnApi();
-		var znRecordDao = new ZnRecordDao(znApi);
-		var znNoteDao = new ZnNoteDao(znApi);
-		znRecordService = new ZnRecordService(znRecordDao, znNoteDao);
+		var znFactory = util.ZnFactory();
+		znRecordService = znFactory.ZnRecordService();
 		znNock = util.ZnNock();
 	});
 
