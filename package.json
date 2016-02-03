@@ -1,6 +1,6 @@
 {
   "name": "zn-resource",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Helper for using zengine resources on backend plugins (unofficial)",
   "dependencies": {
     "bluebird": "^3.0.5",
