@@ -98,3 +98,33 @@ Find by field value:
     // record or null
   });
 ```
+
+## Forms
+
+Similar to record service but you get an instance of [ZnForm](https://github.com/rcarraretto/zn-resource/blob/master/src/zn-form.js) instead, which means you not only get form data but you can also call methods.
+
+```js
+
+  // GET /forms/5
+  znFormService.get(5).then(function(form) {
+    // form instanceof ZnForm === true
+    // form.id === 5
+    // form.getEmailValidatedFields()
+  });
+```
+
+Query workspace forms
+
+```js
+
+  var request = {
+    workspace: {
+      id: 18
+    }
+  };
+  
+  // GET /forms?workspace.id=18&attributes=id,name&related=fields,folders
+  znFormService.query(request).then(function(forms) {
+  
+  });
+```
