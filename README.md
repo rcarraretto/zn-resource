@@ -130,3 +130,6 @@ Query forms
   
   });
 ```
+## Testing
+
+To test your backend service without doing actual requests to Zengine, you can use [zn-resource-fake](https://github.com/rcarraretto/zn-resource-fake).
