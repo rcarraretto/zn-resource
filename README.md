@@ -1,3 +1,100 @@
 # zn-resource
 
 Handle Zengine API resources in Zengine backend services (unofficial).
+
+# Install
+
+```sh
+$ npm install zn-resource
+```
+
+# Use
+
+```js
+// Require the built-in ZnHttp (notice the path depends on where you are)
+var ZnHttp = require('../../lib/zn-http.js');
+
+// Inject ZnHttp into zn-resource and ask for the resource service you want
+var znRecordService = require('zn-resource')({ resource: 'record', ZnHttp: ZnHttp });
+var znFormService = require('zn-resource')({ resource: 'form', ZnHttp: ZnHttp });
+var znActivityService = require('zn-resource')({ resource: 'activity', ZnHttp: ZnHttp });
+```
+
+## Records
+
+Get record:
+
+```js
+
+  var request = {
+    id: 40
+    formId: 5
+  };
+
+  // GET /forms/5/records/40
+  znRecordService.get(request).then(function(record) {
+    // record.id === 40
+    // record.formId === 5
+  });
+```
+
+Query records (paginated):
+
+```js
+
+  var request = {
+    formId: 5
+    field123: 'apples'
+  };
+
+  // GET /forms/5/records?field123=apples
+  znRecordService.query(request).then(function(response) {
+    // response.totalCount
+    // response.data
+  });
+```
+
+Create record:
+
+```js
+
+  var record = {
+    formId: 5,
+    field123: 'apples'
+  };
+
+  // POST /forms/5/records
+  znRecordService.save(request).then(function(record) {
+
+  });
+```
+Update record:
+
+```js
+
+  var record = {
+    id: 40,
+    formId: 5,
+    field123: 'apples'
+  };
+
+  // PUT /forms/5/records/40
+  znRecordService.save(request).then(function(record) {
+
+  });
+```
+Find by field value:
+
+```js
+
+  var record = {
+    formId: 5,
+    fieldId: 123,
+    value: 'apples'
+  };
+
+  // GET /forms/5/records?field123=apples&limit=1
+  znRecordService.findByFieldValue(request).then(function(record) {
+    // record or null
+  });
+```
