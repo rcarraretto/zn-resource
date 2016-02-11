@@ -20,6 +20,8 @@ var znFormService = require('zn-resource')({ resource: 'form', ZnHttp: ZnHttp })
 var znActivityService = require('zn-resource')({ resource: 'activity', ZnHttp: ZnHttp });
 ```
 
+For each of those services, you should be able to perform regular CRUD operations plus extra things, depending on the service.
+
 ## Records
 
 Get record:
@@ -34,7 +36,7 @@ Get record:
   // GET /forms/5/records/40
   znRecordService.get(request).then(function(record) {
     // record.id === 40
-    // record.formId === 5
+    // record.formId === 5 (set by the service for convenience)
   });
 ```
 
@@ -113,7 +115,7 @@ Similar to record service but you get an instance of [ZnForm](https://github.com
   });
 ```
 
-Query workspace forms
+Query forms
 
 ```js
 
