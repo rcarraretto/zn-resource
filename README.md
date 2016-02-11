@@ -93,7 +93,7 @@ Find by field value:
 
 ```js
 
-  var record = {
+  var request = {
     formId: 5,
     fieldId: 123,
     value: 'apples'
