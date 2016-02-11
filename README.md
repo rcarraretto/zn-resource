@@ -28,13 +28,13 @@ Get record:
 
 ```js
 
-  var request = {
+  var id = {
     id: 40
     formId: 5
   };
 
   // GET /forms/5/records/40
-  znRecordService.get(request).then(function(record) {
+  znRecordService.get(id).then(function(record) {
     // record.id === 40
     // record.formId === 5 (set by the service for convenience)
   });
