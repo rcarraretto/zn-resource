@@ -64,13 +64,13 @@ Create record:
 
 ```js
 
-  var record = {
+  var recordData = {
     formId: 5,
     field123: 'apples'
   };
 
   // POST /forms/5/records
-  znRecordService.save(request).then(function(record) {
+  znRecordService.save(recordData).then(function(record) {
 
   });
 ```
@@ -78,14 +78,14 @@ Update record:
 
 ```js
 
-  var record = {
+  var recordData = {
     id: 40,
     formId: 5,
     field123: 'apples'
   };
 
   // PUT /forms/5/records/40
-  znRecordService.save(request).then(function(record) {
+  znRecordService.save(recordData).then(function(record) {
 
   });
 ```
