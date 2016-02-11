@@ -1,6 +1,6 @@
 # zn-resource
 
-Handle Zengine API resources in Zengine backend services (unofficial).
+Handle Zengine API resources in Zengine backend services (unofficial and experimental).
 
 # Install
 
@@ -20,7 +20,11 @@ var znFormService = require('zn-resource')({ resource: 'form', ZnHttp: ZnHttp })
 var znActivityService = require('zn-resource')({ resource: 'activity', ZnHttp: ZnHttp });
 ```
 
-For each of those services, you should be able to perform regular CRUD operations plus extra things, depending on the service.
+For each of those services, you should be able to perform regular operations plus extra things, depending on the service.
+The interfaces are similar:
+- get one resource with `get` passing an id
+- query resources with `query` passing a request object – the service will be smart enough to figure out what goes on the endpoint and what goes as query params
+- save a resource with `save` passing resource data – if data has no id, it will create a new resource, otherwise it will update the existing resource
 
 ## Records
 
