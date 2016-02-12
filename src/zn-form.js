@@ -95,9 +95,4 @@ ZnForm.prototype.filterLinkedFormsByLinkType = function(linkType) {
 	});
 };
 
-ZnForm.prototype.addField = function(field) {
-	this.fields.push(field);
-	return field;
-};
-
 module.exports = ZnForm;
