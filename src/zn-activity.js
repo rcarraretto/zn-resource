@@ -1,9 +1,10 @@
 'use strict';
 
-var _ = require('lodash');
+var assign = require('lodash.assign');
+var get = require('lodash.get');
 
 var ZnActivity = function(data) {
-	_.extend(this, data);
+	assign(this, data);
 };
 
 var eventCheckers = {
@@ -32,11 +33,11 @@ ZnActivity.prototype._recordUpdated = function() {
 };
 
 ZnActivity.prototype._getFolderId = function() {
-	return _.get(this, 'record.folder.id');
+	return get(this, 'record.folder.id');
 };
 
 ZnActivity.prototype._changedToFolder = function() {
-	return _.get(this, 'changes.to.folder.id');
+	return get(this, 'changes.to.folder.id');
 };
 
 ZnActivity.prototype._recordCreatedInFolder = function(folderId) {

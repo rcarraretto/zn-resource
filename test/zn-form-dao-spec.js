@@ -37,4 +37,40 @@ describe('ZnFormDao', function() {
 			});
 		});
 	});
+
+	describe('query', function () {
+
+		it('should query', function() {
+
+			var expectedUrl = '/forms' +
+				'?workspace.id=40' +
+				'&attributes=id%2Cname' +
+				'&related=fields%2Cfolders';
+
+			znNock.get(expectedUrl).reply(200, {
+				data: [
+					{ id: 5 },
+					{ id: 6 }
+				]
+			});
+
+			var request = {
+				workspace: {
+					id: 40
+				}
+			};
+
+			return znFormDao.query(request).then(function(response) {
+
+				expect(response.data).to.exist;
+				expect(response.data.length).to.equal(2);
+
+				expect(response.data[0].id).to.equal(5);
+				expect(response.data[0] instanceof ZnForm).to.equal(true);
+
+				expect(response.data[1].id).to.equal(6);
+				expect(response.data[1] instanceof ZnForm).to.equal(true);
+			});
+		});
+	});
 });

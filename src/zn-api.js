@@ -1,6 +1,9 @@
 'use strict';
 
-var _ = require('lodash');
+var reduce = require('lodash.reduce');
+var isArray = require('lodash.isarray');
+var isObject = require('lodash.isobject');
+var forEach = require('lodash.foreach');
 
 var ZnApi = function(znHttp) {
 	this.znHttp = znHttp;
@@ -8,9 +11,9 @@ var ZnApi = function(znHttp) {
 
 var assembleParams = function(params) {
 
-	return _.reduce(params, function(assembled, paramValue, paramKey) {
+	return reduce(params, function(assembled, paramValue, paramKey) {
 
-		if (_.isArray(paramValue)) {
+		if (isArray(paramValue)) {
 
 			paramValue = paramValue.join('|');
 			assembled[paramKey] = paramValue;
@@ -18,9 +21,9 @@ var assembleParams = function(params) {
 			return assembled;
 		}
 
-		if (_.isObject(paramValue)) {
+		if (isObject(paramValue)) {
 
-			_.forEach(paramValue, function(value, key) {
+			forEach(paramValue, function(value, key) {
 				assembled[paramKey + '.' + key] = value;
 			});
 

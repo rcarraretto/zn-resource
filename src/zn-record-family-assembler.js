@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
+var forEach = require('lodash.foreach');
+var reduce = require('lodash.reduce');
 
 var assemble = function(primaryForm, recordsByForm) {
 
@@ -8,18 +9,18 @@ var assemble = function(primaryForm, recordsByForm) {
 
 	var primaryRecords = recordsByForm[primaryForm.id];
 
-	_.forEach(primaryRecords, function(primaryRecord) {
+	forEach(primaryRecords, function(primaryRecord) {
 		families[primaryRecord.id] = {};
 		families[primaryRecord.id][primaryForm.id] = primaryRecord;
 	});
 
-	_.forEach(primaryForm.linkedForms, function(linkedForm) {
+	forEach(primaryForm.linkedForms, function(linkedForm) {
 
 		var secondaryFormId = linkedForm.form.id;
 
 		var secondaryRecords = recordsByForm[secondaryFormId];
 
-		_.forEach(secondaryRecords, function(secondaryRecord) {
+		forEach(secondaryRecords, function(secondaryRecord) {
 
 			var linkedField = 'field' + linkedForm.keyField.id;
 
@@ -43,7 +44,7 @@ var _mapFamilyRecords = function(family, recordIteratee) {
 		return familyMapped;
 	};
 
-	return _.reduce(family, mapRecord, {});
+	return reduce(family, mapRecord, {});
 };
 
 var mapRecords = function(families, recordIteratee) {
@@ -55,7 +56,7 @@ var mapRecords = function(families, recordIteratee) {
 		return familiesMapped;
 	};
 
-	return _.reduce(families, mapFamilyRecords, {});
+	return reduce(families, mapFamilyRecords, {});
 };
 
 module.exports = {

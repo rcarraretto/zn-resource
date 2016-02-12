@@ -1,9 +1,12 @@
 'use strict';
 
-var _ = require('lodash');
+var assign = require('lodash.assign');
+var forEach = require('lodash.foreach');
+var map = require('lodash.map');
+var filter = require('lodash.filter');
 
 var ZnForm = function(data) {
-	_.extend(this, data);
+	assign(this, data);
 	this.fields = this.fields || [];
 };
 
@@ -11,7 +14,7 @@ ZnForm.prototype.getEmailValidatedFields = function() {
 
 	var emailValidatedFields = [];
 
-	_.forEach(this.fields, function(field) {
+	forEach(this.fields, function(field) {
 		if (field.type === 'text-input') {
 			if (field.settings.validation.emailAddress) {
 				emailValidatedFields.push(field);
@@ -76,7 +79,7 @@ ZnForm.prototype.getLinkedFormIds = function(linkType) {
 
 	var targetLinkedForms = this.filterLinkedFormsByLinkType(linkType);
 
-	return _.map(targetLinkedForms, function(linkedForm) {
+	return map(targetLinkedForms, function(linkedForm) {
 		return linkedForm.form.id;
 	});
 };
@@ -87,14 +90,9 @@ ZnForm.prototype.filterLinkedFormsByLinkType = function(linkType) {
 		return this.linkedForms;
 	}
 
-	return _.filter(this.linkedForms, function(linkedForm) {
+	return filter(this.linkedForms, function(linkedForm) {
 		return linkedForm.type === linkType;
 	});
-};
-
-ZnForm.prototype.addField = function(field) {
-	this.fields.push(field);
-	return field;
 };
 
 module.exports = ZnForm;

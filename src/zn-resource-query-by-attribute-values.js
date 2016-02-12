@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
+var chunk = require('lodash.chunk');
+var isEmpty = require('lodash.isempty');
 var Promise = require('bluebird');
 
 var ZnResourceQueryByAttributeValues = function(znResourceQuery) {
@@ -12,7 +13,7 @@ ZnResourceQueryByAttributeValues.prototype.queryData = function(request, attribu
 
 	var resources = [];
 	var znResourceQuery = this.znResourceQuery;
-	var chunks = _.chunk(values, this.limitPerQuery);
+	var chunks = chunk(values, this.limitPerQuery);
 
 	request.limit = this.limitPerQuery;
 
@@ -22,7 +23,7 @@ ZnResourceQueryByAttributeValues.prototype.queryData = function(request, attribu
 
 	var queryChunks = function() {
 
-		if (_.isEmpty(chunks)) {
+		if (isEmpty(chunks)) {
 			return Promise.resolve(resources);
 		}
 
