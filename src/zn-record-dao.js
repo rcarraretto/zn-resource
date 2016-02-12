@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
+var map = require('lodash.map');
+var merge = require('lodash.merge');
 
 var ZnRecordDao = function(znApi) {
 	this.znApi = znApi;
@@ -24,7 +25,7 @@ var _formatRecord = function(record, formId) {
 
 var _formatRecords = function(response, formId) {
 
-	response.data = _.map(response.data, function(record) {
+	response.data = map(response.data, function(record) {
 		return _formatRecord(record, formId);
 	});
 
@@ -54,7 +55,7 @@ ZnRecordDao.prototype.query = function(request) {
 		return _formatRecords(response, formId);
 	};
 
-	var params = _.merge({}, request);
+	var params = merge({}, request);
 	delete params.formId;
 
 	return this.znApi.query(endpoint, params).then(formatRecords);

@@ -4,7 +4,19 @@
   "description": "Helper for using zengine resources on backend plugins (unofficial)",
   "dependencies": {
     "bluebird": "^3.0.5",
-    "lodash": "^4.0.0"
+    "lodash.assign": "^4.0.2",
+    "lodash.chunk": "^4.0.1",
+    "lodash.create": "^4.0.1",
+    "lodash.filter": "^4.1.0",
+    "lodash.foreach": "^4.0.0",
+    "lodash.get": "^4.1.0",
+    "lodash.isarray": "^4.0.0",
+    "lodash.isempty": "^4.1.1",
+    "lodash.isobject": "^3.0.2",
+    "lodash.isstring": "^4.0.1",
+    "lodash.map": "^4.1.0",
+    "lodash.merge": "^4.1.0",
+    "lodash.reduce": "^4.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

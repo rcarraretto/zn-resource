@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('lodash');
+var map = require('lodash.map');
 
 var ZnForm = require('./zn-form.js');
 
@@ -15,7 +15,7 @@ var instantiateZnForm = function(data) {
 
 var instantiateZnForms = function(response) {
 
-	response.data = _.map(response.data, instantiateZnForm);
+	response.data = map(response.data, instantiateZnForm);
 
 	return response;
 };

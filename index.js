@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('lodash');
+var isString = require('lodash.isstring');
 var ZnFactory = require('./src/zn-factory.js');
 var ZnActivity = require('./src/zn-activity.js');
 
@@ -39,7 +39,7 @@ var instantiateResourceService = function(options) {
 
 var main = function(options) {
 
-	if (_.isString(options)) {
+	if (isString(options)) {
 		return getResourceClass(options);
 	}
 
