@@ -1,6 +1,6 @@
 'use strict';
 
-var forEach = require('lodash.forEach');
+var forEach = require('lodash.foreach');
 var reduce = require('lodash.reduce');
 
 var assemble = function(primaryForm, recordsByForm) {

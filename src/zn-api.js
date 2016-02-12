@@ -1,9 +1,9 @@
 'use strict';
 
 var reduce = require('lodash.reduce');
-var isArray = require('lodash.isArray');
-var isObject = require('lodash.isObject');
-var forEach = require('lodash.forEach');
+var isArray = require('lodash.isarray');
+var isObject = require('lodash.isobject');
+var forEach = require('lodash.foreach');
 
 var ZnApi = function(znHttp) {
 	this.znHttp = znHttp;

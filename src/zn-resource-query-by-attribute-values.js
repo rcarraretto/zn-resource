@@ -1,7 +1,7 @@
 'use strict';
 
 var chunk = require('lodash.chunk');
-var isEmpty = require('lodash.isEmpty');
+var isEmpty = require('lodash.isempty');
 var Promise = require('bluebird');
 
 var ZnResourceQueryByAttributeValues = function(znResourceQuery) {
