@@ -130,8 +130,8 @@ Query forms
   };
   
   // GET /forms?workspace.id=18&attributes=id,name&related=fields,folders
-  znFormService.query(request).then(function(forms) {
-  
+  znFormService.query(request).then(function(response) {
+    // response.data is array of ZnForms
   });
 ```
 ## Testing
