@@ -34,6 +34,10 @@ var instantiateResourceService = function(options) {
 		return factory.ZnActivityDao();
 	}
 
+	if (options.resource === 'member') {
+		return factory.ZnMemberService();
+	}
+
 	onInvalidResource(options.resource);
 };
 

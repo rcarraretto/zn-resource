@@ -13,7 +13,7 @@ describe('ZnMemberService', function() {
 
 	beforeEach(function() {
 		var znApi = util.ZnApi();
-		znMemberService = new ZnMemberService(znApi);
+		znMemberService = ZnMemberService(znApi);
 
 		znNock = util.ZnNock();
 
