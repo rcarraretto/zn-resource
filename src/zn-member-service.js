@@ -1,31 +1,35 @@
 'use strict';
 
+var _get = require('lodash.get');
+
 var ZnMemberService = function(znApi) {
 
 	var get = function(workspaceId) {
 
-		var getUser = function() {
-			return znApi.get('/users/me');
+		var _user;
+
+		var setUser = function(user) {
+			_user = user;
 		};
 
-		var getUserMembership = function(user) {
+		var getUser = function() {
+			return znApi.get('/users/me').then(setUser);
+		};
+
+		var getUserMembership = function() {
 			var endpoint = ['/workspaces', workspaceId, 'members'].join('/');
-			endpoint += '?user.id=' + user.id;
+			endpoint += '?user.id=' + _user.id;
 			return znApi.queryFirst(endpoint);
 		};
 
 		var resolveMembership = function(member) {
-			var roleId;
-			if (member) {
-				roleId = member.role.id;
-			} else {
-				roleId = 0;
-			}
-			var membership = {};
-			membership.isOwner = (roleId === 1);
-			membership.isAdmin = (roleId === 2) || membership.isOwner;
-			membership.isMember = Boolean(roleId);
-			return membership;
+			var roleId = _get(member, 'role.id');
+			return {
+				isOwner: (roleId === 1),
+				isAdmin: (roleId === 1) || (roleId === 2),
+				isMember: Boolean(roleId),
+				userId: _user.id
+			};
 		};
 
 		return getUser()

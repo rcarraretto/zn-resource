@@ -80,6 +80,7 @@ describe('ZnMemberService', function() {
 				expect(membership.isOwner).to.equal(true);
 				expect(membership.isAdmin).to.equal(true);
 				expect(membership.isMember).to.equal(true);
+				expect(membership.userId).to.equal(115);
 			});
 		});
 	});
@@ -96,6 +97,7 @@ describe('ZnMemberService', function() {
 				expect(membership.isOwner).to.equal(false);
 				expect(membership.isAdmin).to.equal(true);
 				expect(membership.isMember).to.equal(true);
+				expect(membership.userId).to.equal(115);
 			});
 		});
 	});
@@ -112,6 +114,7 @@ describe('ZnMemberService', function() {
 				expect(membership.isOwner).to.equal(false);
 				expect(membership.isAdmin).to.equal(false);
 				expect(membership.isMember).to.equal(true);
+				expect(membership.userId).to.equal(115);
 			});
 		});
 	});
@@ -128,6 +131,7 @@ describe('ZnMemberService', function() {
 				expect(membership.isOwner).to.equal(false);
 				expect(membership.isAdmin).to.equal(false);
 				expect(membership.isMember).to.equal(false);
+				expect(membership.userId).to.equal(115);
 			});
 		});
 	});
