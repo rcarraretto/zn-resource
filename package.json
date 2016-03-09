@@ -1,6 +1,6 @@
 {
   "name": "zn-resource",
-  "version": "0.5.1",
+  "version": "0.6.1",
   "description": "Helper for using zengine resources on backend plugins (unofficial)",
   "dependencies": {
     "bluebird": "^3.0.5",
@@ -32,10 +32,11 @@
     "test": "test"
   },
   "scripts": {
-    "codesmell": "jshint test src index.js",
+    "codesmell": "jshint test test-integration src index.js",
     "lint": "npm run codesmell -s",
     "test": "mocha --reporter min --require test/support/mocha.js",
     "test:watch": "watch 'npm run test -s'",
+    "test-integration": "mocha --timeout 15000 test-integration",
     "watch": "watch 'npm run test -s || npm run lint -s'"
   },
   "repository": {

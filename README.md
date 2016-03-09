@@ -18,6 +18,7 @@ var ZnHttp = require('../../lib/zn-http.js');
 var znRecordService = require('zn-resource')({ resource: 'record', ZnHttp: ZnHttp });
 var znFormService = require('zn-resource')({ resource: 'form', ZnHttp: ZnHttp });
 var znActivityService = require('zn-resource')({ resource: 'activity', ZnHttp: ZnHttp });
+var znMemberService = require('zn-resource')({ resource: 'member', ZnHttp: ZnHttp });
 ```
 
 For each of those services, you should be able to perform regular operations plus extra things, depending on the service.
@@ -134,6 +135,22 @@ Query forms
     // response.data is array of ZnForms
   });
 ```
+
+## Workspace Membership
+
+Pseudo-resource concerning the current user and a workspace.
+
+```js
+
+  var workspaceId = 18;
+  znMemberService.get(workspaceId).then(function(membership) {
+    // membership.userId (via /users/me)
+    // membership.isOwner (boolean)
+    // membership.isAdmin (true, if owner or admin)
+    // membership.isMember (true, if member of any kind)
+  });
+```
+
 ## Testing
 
 To test your backend service without doing actual requests to Zengine, you can use [zn-resource-fake](https://github.com/rcarraretto/zn-resource-fake).

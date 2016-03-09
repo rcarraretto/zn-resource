@@ -68,6 +68,13 @@ ZnApi.prototype.query = function(endpoint, params) {
 		.then(returnParsedResponse);
 };
 
+ZnApi.prototype.queryFirst = function(endpoint, params) {
+
+	return this.query(endpoint, params).then(function(response) {
+		return response.data[0];
+	});
+};
+
 var returnResponseData = function(response) {
 	return response.getBody().data;
 };
